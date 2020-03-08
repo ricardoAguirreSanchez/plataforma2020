@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, Image, Button, ImageBackground } from 'react-native';
+import { StyleSheet, Text, View, Image, Button, ImageBackground, Platform ,  TextInput} from 'react-native';
 
 export default function App() {
 
-  const [name, setName] = useState('Hola Reactivo');
+  const [saludo, setSaludo] = useState('Reactivo');
+  const [cod, setCod] = useState(255);
 
   return (
-    <ImageBackground source={require('./assets/fondo.png')} style={styles.container}>
+    <ImageBackground source={require('./assets/fondo.png')} resizeMode='cover' style={styles.container}>
 
       <View style={styles.header}>
         <View style={styles.headerLeft}>
@@ -15,19 +16,22 @@ export default function App() {
 
         <View style={styles.headerRight}>
           <Button style={styles.button} title='Login' onPress={() => {
-            setName('No te logeo una mierda')
+            setSaludo('No te logeo una mierda')
+            setCod(1111111)
           }}></Button>
         </View>
       </View>
 
       <View style={styles.body}>
-        <Text >{name}</Text>
+        <TextInput placeholder="Ingresa el nombre:" onChangeText={(nuevoNombre) => setSaludo(nuevoNombre)} 
+          style={styles.textinput} placeholderTextColor="white" maxLength={10}> 
+        </TextInput>
       </View>
 
       <View style={styles.footer}>
-        <View style={styles.footerLeft}><Text>MENU</Text></View>
-        <View style={styles.footerCenter}><Text>ESTADO</Text></View>
-        <View style={styles.footerRight}><Text>CONTACTO</Text></View>
+        <View style={styles.footerLeft}><Text style={styles.text}>Hola {saludo} Nº:{cod}</Text></View>
+        <View style={styles.footerCenter}><Text style={styles.text}>ESTADO</Text></View>
+        <View style={styles.footerRight}><Text style={styles.text}>CONTACTO</Text></View>
       </View>
 
     </ImageBackground>
@@ -40,6 +44,21 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     backgroundColor: 'green',
   },
+
+  
+  textinput:{
+    borderWidth:1,
+    borderColor:"white",
+    padding:5,
+    fontSize:25,
+  },
+
+
+  text:{
+    color:'white',
+    fontSize:25,
+  },
+
   header: {
     flexDirection: 'row',
   },
